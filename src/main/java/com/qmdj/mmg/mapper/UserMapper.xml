@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qmdj.mmg.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.qmdj.mmg.vo.User" >
+    <id column="usercode" property="usercode" jdbcType="VARCHAR" />
+    <result column="ipcode" property="ipcode" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="userstate" property="userstate" jdbcType="TINYINT" />
+    <result column="userdepartment" property="userdepartment" jdbcType="VARCHAR" />
+    <result column="job" property="job" jdbcType="VARCHAR" />
+    <result column="outcode" property="outcode" jdbcType="VARCHAR" />
+    <result column="param1" property="param1" jdbcType="VARCHAR" />
+    <result column="param2" property="param2" jdbcType="VARCHAR" />
+    <result column="param3" property="param3" jdbcType="VARCHAR" />
+    <result column="param4" property="param4" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    usercode, ipcode, username, userstate, userdepartment, job, outcode, param1, param2, 
+    param3, param4
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.qmdj.mmg.vo.UserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where usercode = #{usercode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from user
+    where usercode = #{usercode,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.qmdj.mmg.vo.UserExample" >
+    delete from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.qmdj.mmg.vo.User" >
+    insert into user (usercode, ipcode, username, 
+      userstate, userdepartment, job, 
+      outcode, param1, param2, 
+      param3, param4)
+    values (#{usercode,jdbcType=VARCHAR}, #{ipcode,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{userstate,jdbcType=TINYINT}, #{userdepartment,jdbcType=VARCHAR}, #{job,jdbcType=VARCHAR}, 
+      #{outcode,jdbcType=VARCHAR}, #{param1,jdbcType=VARCHAR}, #{param2,jdbcType=VARCHAR}, 
+      #{param3,jdbcType=VARCHAR}, #{param4,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qmdj.mmg.vo.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="usercode != null" >
+        usercode,
+      </if>
+      <if test="ipcode != null" >
+        ipcode,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="userstate != null" >
+        userstate,
+      </if>
+      <if test="userdepartment != null" >
+        userdepartment,
+      </if>
+      <if test="job != null" >
+        job,
+      </if>
+      <if test="outcode != null" >
+        outcode,
+      </if>
+      <if test="param1 != null" >
+        param1,
+      </if>
+      <if test="param2 != null" >
+        param2,
+      </if>
+      <if test="param3 != null" >
+        param3,
+      </if>
+      <if test="param4 != null" >
+        param4,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="usercode != null" >
+        #{usercode,jdbcType=VARCHAR},
+      </if>
+      <if test="ipcode != null" >
+        #{ipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userstate != null" >
+        #{userstate,jdbcType=TINYINT},
+      </if>
+      <if test="userdepartment != null" >
+        #{userdepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null" >
+        #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="outcode != null" >
+        #{outcode,jdbcType=VARCHAR},
+      </if>
+      <if test="param1 != null" >
+        #{param1,jdbcType=VARCHAR},
+      </if>
+      <if test="param2 != null" >
+        #{param2,jdbcType=VARCHAR},
+      </if>
+      <if test="param3 != null" >
+        #{param3,jdbcType=VARCHAR},
+      </if>
+      <if test="param4 != null" >
+        #{param4,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.qmdj.mmg.vo.UserExample" resultType="java.lang.Integer" >
+    select count(*) from user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update user
+    <set >
+      <if test="record.usercode != null" >
+        usercode = #{record.usercode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ipcode != null" >
+        ipcode = #{record.ipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.username != null" >
+        username = #{record.username,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userstate != null" >
+        userstate = #{record.userstate,jdbcType=TINYINT},
+      </if>
+      <if test="record.userdepartment != null" >
+        userdepartment = #{record.userdepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.job != null" >
+        job = #{record.job,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outcode != null" >
+        outcode = #{record.outcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.param1 != null" >
+        param1 = #{record.param1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.param2 != null" >
+        param2 = #{record.param2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.param3 != null" >
+        param3 = #{record.param3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.param4 != null" >
+        param4 = #{record.param4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update user
+    set usercode = #{record.usercode,jdbcType=VARCHAR},
+      ipcode = #{record.ipcode,jdbcType=VARCHAR},
+      username = #{record.username,jdbcType=VARCHAR},
+      userstate = #{record.userstate,jdbcType=TINYINT},
+      userdepartment = #{record.userdepartment,jdbcType=VARCHAR},
+      job = #{record.job,jdbcType=VARCHAR},
+      outcode = #{record.outcode,jdbcType=VARCHAR},
+      param1 = #{record.param1,jdbcType=VARCHAR},
+      param2 = #{record.param2,jdbcType=VARCHAR},
+      param3 = #{record.param3,jdbcType=VARCHAR},
+      param4 = #{record.param4,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qmdj.mmg.vo.User" >
+    update user
+    <set >
+      <if test="ipcode != null" >
+        ipcode = #{ipcode,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="userstate != null" >
+        userstate = #{userstate,jdbcType=TINYINT},
+      </if>
+      <if test="userdepartment != null" >
+        userdepartment = #{userdepartment,jdbcType=VARCHAR},
+      </if>
+      <if test="job != null" >
+        job = #{job,jdbcType=VARCHAR},
+      </if>
+      <if test="outcode != null" >
+        outcode = #{outcode,jdbcType=VARCHAR},
+      </if>
+      <if test="param1 != null" >
+        param1 = #{param1,jdbcType=VARCHAR},
+      </if>
+      <if test="param2 != null" >
+        param2 = #{param2,jdbcType=VARCHAR},
+      </if>
+      <if test="param3 != null" >
+        param3 = #{param3,jdbcType=VARCHAR},
+      </if>
+      <if test="param4 != null" >
+        param4 = #{param4,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where usercode = #{usercode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qmdj.mmg.vo.User" >
+    update user
+    set ipcode = #{ipcode,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      userstate = #{userstate,jdbcType=TINYINT},
+      userdepartment = #{userdepartment,jdbcType=VARCHAR},
+      job = #{job,jdbcType=VARCHAR},
+      outcode = #{outcode,jdbcType=VARCHAR},
+      param1 = #{param1,jdbcType=VARCHAR},
+      param2 = #{param2,jdbcType=VARCHAR},
+      param3 = #{param3,jdbcType=VARCHAR},
+      param4 = #{param4,jdbcType=VARCHAR}
+    where usercode = #{usercode,jdbcType=VARCHAR}
+  </update>
+</mapper>
